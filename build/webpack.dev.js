@@ -28,13 +28,21 @@ module.exports = {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
                     // 可加入less/sass等loader处理
-                    use: 'css-loader',
+                    use: ['css-loader', 'postcss-loader'],
                     // 若上述处理顺利，执行style-loader并导出文件
                     fallback: 'style-loader',
                     // 定义css文件使用的背景图路径，在css文件夹外（如若不定义，背景图片资源引用路径错误）
                     // background: url(img/放飞自我.jpg)
                     publicPath: '../../'
                 })
+            },
+            {
+                test: /\.less$/,
+                use: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
+            },
+            {
+                test: /\.s[ac]ss$/,
+                use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
             },
             {
                 test: /\.(gif|jpg|png|woff|svg|eot|ttf)\??.*$/,
@@ -52,7 +60,7 @@ module.exports = {
                 test: /\.html$/,
                 loader: 'html-loader',
                 options: {
-                    // 标签+属性 貌似link:href会出错，引入脚本也会出现问题，img，audio，video是OK的
+                    // 标签+属性 貌似link:href会出错，引入脚本也会出现问题，img，audio，video没有问题
                     attrs: ['img:src', 'audio:src', 'video:src'],
                     interpolate: true
                 }

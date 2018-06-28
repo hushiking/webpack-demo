@@ -1,4 +1,7 @@
 import '../style/index.css'
+import '../style/index.less'
+import '../style/index.sass'
+import '../style/index.scss'
 
 const sayHi = () => {
     console.log('hi~')

@@ -5,3 +5,15 @@ body {
 div {
     background: url('../public/放飞自我.jpg') no-repeat;
 }
+p {
+    display: flex;
+    animation: movetop 2s linear 0.5s 3;
+}
+@keyframes movetop {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-100%);
+    }
+}

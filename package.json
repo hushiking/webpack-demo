@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --config build/webpack.dev.js",
-    "dev": "rm -rf dist & webpack --config build/webpack.dev.js"
+    "start": "nodemon --watch build/ --exec \"webpack-dev-server --config build/webpack.dev.js\"",
+    "build": "rm -rf dist & webpack --config build/webpack.dev.js"
   },
   "repository": "git@github.com:hushiking/webpack-demo.git",
   "author": "hushijin <hushiking@163.com>",
   "license": "MIT",
   "devDependencies": {
+    "autoprefixer": "^8.6.4",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.7.0",
@@ -19,6 +20,12 @@
     "file-loader": "^1.1.11",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
+    "less": "^3.0.4",
+    "less-loader": "^4.1.0",
+    "node-sass": "^4.9.0",
+    "nodemon": "^1.17.5",
+    "postcss-loader": "^2.1.5",
+    "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",
     "webpack": "3.12.0",
