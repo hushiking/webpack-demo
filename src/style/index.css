@@ -1,0 +1,7 @@
+body {
+    font: 700 24px Microsoft yahei;
+    background: url('../public/山水-竹.jpg');
+}
+div {
+    background: url('../public/放飞自我.jpg') no-repeat;
+}
