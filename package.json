@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --watch build/ --exec \"webpack-dev-server --config build/webpack.dev.js\"",
-    "build": "rm -rf dist & webpack --config build/webpack.dev.js"
+    "dev": "nodemon --watch build/ --exec \"webpack-dev-server --config build/webpack.dev.1.js\"",
+    "build": "webpack --config build/webpack.prod.js",
+    "built": "rm -rf dist & webpack --config build/webpack.dev.1.js"
   },
   "repository": "git@github.com:hushiking/webpack-demo.git",
   "author": "hushijin <hushiking@163.com>",
@@ -25,10 +27,13 @@
     "node-sass": "^4.9.0",
     "nodemon": "^1.17.5",
     "postcss-loader": "^2.1.5",
+    "rimraf": "^2.6.2",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
+    "uglifyjs-webpack-plugin": "^1.2.7",
     "url-loader": "^1.0.1",
     "webpack": "3.12.0",
-    "webpack-dev-server": "2.10.1"
+    "webpack-dev-server": "2.10.1",
+    "webpack-merge": "^4.1.3"
   }
 }

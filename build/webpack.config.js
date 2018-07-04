@@ -29,14 +29,14 @@ module.exports = {
         filename: 'static/js/[name].[hash].js'
     },
     module: {
-        loaders: [
+        rules: [ // 兼容webpack1采用的loaders
             {
                 test: /\.js$/,
                 use: 'babel-loader'
             },
             {
                 test: /.html$/,
-                loader: 'html-loader',
+                loader: 'html-loader', // 兼容webpack1采用的loader
                 options: {
                     // 标签+属性，不支持link:href script:src
                     attrs: ['img:src', 'audio:src', 'video:src']

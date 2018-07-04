@@ -11,12 +11,18 @@ exports.publicPath = _path => path.posix.join(staticDir, _path)
  * @param {Object} options
  * @return {Array}
  */
-exports.styleLoader = (options) => {
-    options = options || {}
+exports.styleLoader = (opts) => {
+    const options = opts || {}
     // 固定的两个loader
+    const styleLoader = {
+        loader: 'style-loader',
+        // 是否生成.map
+        options: {
+            sourceMap: options.sourceMap
+        }
+    }
     const cssLoader = {
         loader: 'css-loader',
-        // 是否生成.map
         options: {
             sourceMap: options.sourceMap
         }
@@ -47,18 +53,18 @@ exports.styleLoader = (options) => {
         if (options.extract) {
             return ExtractTextPlugin.extract({
                 use: loaders,
-                fallback: 'style-loader',
+                fallback: styleLoader,
                 publicPath: '../../'
             })
         }
-        return ['style-laoder'].concat(loaders)
+        return [styleLoader].concat(loaders)
     }
 
     // 生成对应loader
     const loaders = {
         css: combineLoaders(),
         less: combineLoaders('less'),
-        scss: combineLoaders('scss'),
+        scss: combineLoaders('sass'),
         sass: combineLoaders('sass')
     }
 
