@@ -6,7 +6,9 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 module.exports = {
     // entry: path.join(__dirname, '../src/script/index.js'), // 单个入口打包的js文件名字为main.js，css也是main.css
     entry: {
-        app: path.join(__dirname, '../src/script/index.js')
+        index: path.join(__dirname, '../src/script/index.js'),
+        index1: path.join(__dirname, '../src/script/index.1.js'),
+        index2: path.join(__dirname, '../src/script/index.2.js')
     },
     output: {
         path: path.join(__dirname, '../dist'),
@@ -74,6 +76,19 @@ module.exports = {
                     limit: 10240,
                     name: 'static/media/[name].[hash:8].[ext]'
                 }
+            },
+            {
+                test: require.resolve('jquery'),
+                use: [
+                    {
+                        loader: 'expose-loader',
+                        options: 'jQuery'
+                    },
+                    {
+                        loader: 'expose-loader',
+                        options: '$'
+                    }
+                ]
             }
         ]
     },
@@ -85,7 +100,9 @@ module.exports = {
             // 打包后生成的html文件名，该文件将被存放在输出目录中，可以自定义路径
             filename: 'index.html',
             // 模板文件，以该文件生成打包后的html文件
-            template: path.join(__dirname, '../src/view/index.html')
+            template: path.join(__dirname, '../src/view/index.html'),
+            // 只提取chunkName为index的入口文件打包生成的js，不设置该项默认提取所有入口文件打包生成的js
+            chunks: ['index']
         }),
         new CopyWebpackPlugin([{
             // 从第三方文件原始目录复制

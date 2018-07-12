@@ -2,8 +2,8 @@ module.exports = {
     // 多页面配置
     pageNames: [
         'index',
-        // 'demo1',
-        // 'demo2'
+        'index.1',
+        'index.2'
     ],
     // 开发模式
     dev: {
