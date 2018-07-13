@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -89,6 +90,10 @@ module.exports = {
                         options: '$'
                     }
                 ]
+            },
+            {
+                test: /\.ejs$/,
+                use: 'ejs-loader?variable=data'
             }
         ]
     },
@@ -99,10 +104,10 @@ module.exports = {
         new HtmlWebpackPlugin({
             // 打包后生成的html文件名，该文件将被存放在输出目录中，可以自定义路径
             filename: 'index.html',
-            // 模板文件，以该文件生成打包后的html文件
+            // 模板文件，基于该文件生成打包后的html文件
             template: path.join(__dirname, '../src/view/index.html'),
             // 只提取chunkName为index的入口文件打包生成的js，不设置该项默认提取所有入口文件打包生成的js
-            chunks: ['index']
+            chunks: ['index', 'commons']
         }),
         new CopyWebpackPlugin([{
             // 从第三方文件原始目录复制
@@ -111,6 +116,14 @@ module.exports = {
             to: 'static',
             // 筛选过滤，复制所有文件，连同文件夹
             ignore: ['.*']
-        }])
+        }]),
+        new webpack.optimize.CommonsChunkPlugin({
+            // 提取公共模块的chunkName，在html-webpack-plugin插件中使用chunkName
+            name: 'commons',
+            // 生成公共模块文件路径和文件名，[name]为chunkName，即commons
+            filename: 'static/js/[name].[hash].js',
+            // 模块被引用的最小次数，低于该次数将不被提取
+            minChunks: 2
+        })
     ]
 }

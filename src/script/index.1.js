@@ -3,6 +3,9 @@ import '../style/index.less'
 import '../style/index.sass'
 import '../style/index.scss'
 
+const $ = require('jquery')
+console.log($)
+
 const sayHi = () => {
     console.log('index1~')
 }

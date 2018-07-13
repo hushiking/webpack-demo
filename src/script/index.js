@@ -2,8 +2,12 @@ import '../style/index.css'
 import '../style/index.less'
 import '../style/index.sass'
 import '../style/index.scss'
+import NavTpl from '../tpl/tpl'
+
+const nav = new NavTpl()
 
 const $ = require('jquery')
+$('body').prepend(nav.tpl)
 console.log($)
 console.log($('p').html())
 

@@ -8,7 +8,11 @@ const utils = require('./utils')
 module.exports = merge(baseWebpack, {
     devtool: 'inline-source-map',
     module: {
-        loaders: utils.styleLoader(config.dev)
+        loaders: utils.styleLoader(config.dev),
+        devServer: {
+            host: config.dev.host,
+            port: config.dev.prot
+        }
     },
     // plugins: [
     //     new ExtractTextPlugin('static/css/style.css')

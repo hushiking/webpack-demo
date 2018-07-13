@@ -14,7 +14,7 @@ config.pageNames.forEach(page => {
     const htmlPlugin = new HtmlWebpackPlugin({
         filename: `${page}.html`,
         template: path.join(__dirname, `../src/view/${page}.html`),
-        chunks: [page]
+        chunks: [page, 'commons']
     })
     htmlPlugins.push(htmlPlugin)
     entries[page] = path.join(__dirname, `../src/script/${page}.js`)

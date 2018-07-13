@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const baseWebpack = require('./webpack.config')
 const merge = require('webpack-merge')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
@@ -20,6 +21,14 @@ module.exports = merge(baseWebpack, {
         new ExtractTextPlugin('static/css/[name][hash].css'),
         new UglifyJsPlugin({
             sourceMap: config.prod.sourceMap
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            // 提取公共模块的chunkName，在html-webpack-plugin插件中使用chunkName
+            name: 'commons',
+            // 生成公共模块文件路径和文件名，[name]为chunkName，即commons
+            filename: 'static/js/[name].[hash].js',
+            // 模块被引用的最小次数，低于该次数将不被提取
+            minChunks: 2
         })
     ]
 })
