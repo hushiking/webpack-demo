@@ -59,6 +59,23 @@ module.exports = {
                     limit: 102400,
                     name: utils.publicPath('/media/[name][hash:8].[ext]')
                 }
+            },
+            {
+                test: require.resolve('jquery'),
+                use: [
+                    {
+                        loader: 'expose-loader',
+                        options: 'jQuery'
+                    },
+                    {
+                        loader: 'expose-loader',
+                        options: '$'
+                    }
+                ]
+            },
+            {
+                test: /\.ejs$/,
+                use: 'ejs-loader?variable=data'
             }
         ]
     },

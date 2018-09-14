@@ -8,8 +8,8 @@ module.exports = {
     // entry: path.join(__dirname, '../src/script/index.js'), // 单个入口打包的js文件名字为main.js，css也是main.css
     entry: {
         index: path.join(__dirname, '../src/script/index.js'),
-        index1: path.join(__dirname, '../src/script/index.1.js'),
-        index2: path.join(__dirname, '../src/script/index.2.js')
+        "index.1": path.join(__dirname, '../src/script/index.1.js'),
+        "index.2": path.join(__dirname, '../src/script/index.2.js')
     },
     output: {
         path: path.join(__dirname, '../dist'),
@@ -101,6 +101,7 @@ module.exports = {
     plugins: [
         // 抽取css，文件抽取后存放在output输出的dist/static/css下面
         new ExtractTextPlugin('static/css/[name][hash].css'),
+        // 在html文件中自动引用打包后的第三方文件
         new HtmlWebpackPlugin({
             // 打包后生成的html文件名，该文件将被存放在输出目录中，可以自定义路径
             filename: 'index.html',
@@ -123,7 +124,7 @@ module.exports = {
             // 生成公共模块文件路径和文件名，[name]为chunkName，即commons
             filename: 'static/js/[name].[hash].js',
             // 模块被引用的最小次数，低于该次数将不被提取
-            minChunks: 2
+            minChunks: 3
         })
     ]
 }
